@@ -20,7 +20,8 @@
     "url": "https://github.com/manu27/vrbike-rpi-server/issues"
   },
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "pi-gpio": "0.0.8"
   },
   "devDependencies": {}
 }
