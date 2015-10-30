@@ -6,6 +6,7 @@
 
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="js/circles.min.js"></script>
+    <script src="js/socket.io.js"></script>
 
     <script>
         $(document).ready(function () {
@@ -47,11 +48,25 @@
                 textClass:    'circle-graph-text',
                 styleText:    true
             });
+
+            var socket = io.connect('http://192.168.0.20:3000');
+            socket.on('connect', function () {
+                console.log('connected');
+            });
+            //socket.on('news', function (data) {
+            //    console.log(data);
+            //    socket.emit('my other event', { my: 'data' });
+            //});
         });
     </script>
 </head>
 <body>
-    <header></header>
+    <header>
+        <div id="connection-status">
+            <span id="connection-status--text">Verbindung wird hergestellt...</span>
+            <i id="connection-status--led" class="yellow"></i>
+        </div>
+    </header>
     <div id="speed-panel" class="panel">
         <div class="wrapper">
             <h3>Geschwindigkeit</h3>

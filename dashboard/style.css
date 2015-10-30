@@ -18,6 +18,34 @@ header {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+header #connection-status {
+    height: 80px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    line-height: 80px;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+header #connection-status--led {
+    display: inline-block;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    margin-right: 40px;
+    margin-left: 10px;
+    border: 2px solid transparent;
+}
+
+header #connection-status--led.green {
+    border: 2px solid rgba(36, 219, 96, 0.8);
+}
+
+header #connection-status--led.yellow {
+    border: 2px solid rgba(219, 204, 36, 0.8);
+}
+
 .panel {
     position: absolute;
 }
