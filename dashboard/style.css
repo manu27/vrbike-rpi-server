@@ -1,0 +1,76 @@
+body {
+    font-family: Arial;
+    padding: 0;
+    margin: 0;
+    background: url(images/background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    height: 80px;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.panel {
+    position: absolute;
+}
+
+.panel .wrapper {
+    position: absolute;
+    top: 20px;
+    bottom: 20px;
+    left: 20px;
+    right: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.panel .wrapper h3 {
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.panel .wrapper .content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* PANELS */
+#speed-panel.panel {
+    left: 0;
+    top: 80px;
+    bottom: 300px;
+    right: 67%;
+}
+
+#steering-panel.panel {
+    left: 33%;
+    top: 80px;
+    bottom: 300px;
+    right: 33%;
+}
+
+#brake-panel.panel {
+    left: 67%;
+    top: 80px;
+    bottom: 300px;
+    right: 0;
+}
+
+#speed-time-panel.panel {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 300px;
+}
