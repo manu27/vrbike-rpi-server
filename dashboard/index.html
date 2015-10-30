@@ -51,7 +51,8 @@
 
             var socket = io.connect('http://192.168.0.20:3000');
             socket.on('connect', function () {
-                console.log('connected');
+                $('#connection-status--text').text("Verbunden");
+                $('#connection-status--led').removeClass('yellow').addClass('green');
             });
             //socket.on('news', function (data) {
             //    console.log(data);
