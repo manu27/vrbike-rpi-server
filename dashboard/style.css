@@ -46,6 +46,22 @@ header {
     justify-content: center;
 }
 
+.circle-graph-text {
+    font-size: 50px !important;
+    font-weight: 300;
+    line-height: normal !important;
+    height: auto !important;
+    top: 50% !important;
+    margin-top: -40px !important;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.circle-graph-text span {
+    font-size: 16px !important;
+    display: block;
+    color: rgba(36, 219, 214, 0.8);
+}
+
 /* PANELS */
 #speed-panel.panel {
     left: 0;

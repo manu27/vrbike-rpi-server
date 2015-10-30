@@ -5,10 +5,48 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
 
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="js/circles.min.js"></script>
 
     <script>
         $(document).ready(function () {
+            var speedGraph = Circles.create({
+                id:           'speed-graph',
+                radius:       100,
+                value:        0,
+                maxValue:     40,
+                width:        2,
+                text:         function(value){return value + '<br><span>km/h</span>';},
+                colors:       ['rgba(255, 255, 255, 0.1)', '#24dbd6'],
+                duration:     200,
+                textClass:    'circle-graph-text',
+                styleText:    true
+            });
 
+            var steeringGraph = Circles.create({
+                id:           'steering-graph',
+                radius:       100,
+                value:        0,
+                maxValue:     90,
+                width:        2,
+                text:         function(value){return value + '<br><span>Grad</span>';},
+                colors:       ['rgba(255, 255, 255, 0.1)', '#24dbd6'],
+                duration:     200,
+                textClass:    'circle-graph-text',
+                styleText:    true
+            });
+
+            var brakeGraph = Circles.create({
+                id:           'brake-graph',
+                radius:       100,
+                value:        0,
+                maxValue:     100,
+                width:        2,
+                text:         function(value){return value + '<br><span>Prozent</span>';},
+                colors:       ['rgba(255, 255, 255, 0.1)', '#24dbd6'],
+                duration:     200,
+                textClass:    'circle-graph-text',
+                styleText:    true
+            });
         });
     </script>
 </head>
@@ -18,18 +56,24 @@
         <div class="wrapper">
             <h3>Geschwindigkeit</h3>
             <div class="content">
-
+                <div id="speed-graph"></div>
             </div>
         </div>
     </div>
     <div id="steering-panel" class="panel">
         <div class="wrapper">
             <h3>Lenkeinschlag</h3>
+            <div class="content">
+                <div id="steering-graph"></div>
+            </div>
         </div>
     </div>
     <div id="brake-panel" class="panel">
         <div class="wrapper">
             <h3>Bremskraft</h3>
+            <div class="content">
+                <div id="brake-graph"></div>
+            </div>
         </div>
     </div>
     <div id="speed-time-panel" class="panel">
