@@ -57,6 +57,7 @@
             });
             socket.on('speed', function (data) {
                 console.log(data);
+                speedGraph.update(Math.floor(data.kmPerHour));
             });
         });
     </script>
