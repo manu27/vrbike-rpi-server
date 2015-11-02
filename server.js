@@ -3,7 +3,7 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var config = require('config');
-var speedSensor = require('services/speed');
+var speedSensor = require('./services/speed');
 
 speedSensor.initialize(config.get('speed'));
 
