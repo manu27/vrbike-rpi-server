@@ -7,7 +7,7 @@ var gpio = require('gpio');
  *  scale: 1
  * }
  */
-var gpio25, frequency, options;
+var gpio25, frequency, options, timeout;
 
 module.exports = {
 
@@ -22,12 +22,21 @@ module.exports = {
                 console.log("GPIO25 ready to read!");
 
                 gpio25.on('change', function (val) {
-                    if (time) {
-                        var diff = process.hrtime(time);
-                        frequency = (diff[0] * 1e9 + diff[1]) / 1e6;
-                        console.log(frequency);
+                    if (val) { // do something if signal is 1
+                        if (timeout) {
+                            clearTimeout(timeout);
+                        }
+
+                        if (time) {
+                            var diff = process.hrtime(time);
+                            frequency = (diff[0] * 1e9 + diff[1]) / 1e6;
+                            console.log(frequency);
+                        }
+                        time = process.hrtime();
+                        timeout = setTimeout(function () {
+                            frequency = null;
+                        }, 2000);
                     }
-                    time = process.hrtime();
                 });
             }
         });
@@ -39,7 +48,7 @@ module.exports = {
         }
 
         var circumference = 2 * Math.PI * options.radius;
-        var mToMDistance = circumference / options.numberMagnets; // Magnet-to-magnet distance
+        var mToMDistance = circumference / options.numberOfMagnets; // Magnet-to-magnet distance
         var meterPerSecond = 1000 / frequency * mToMDistance * options.scale;
 
         return meterPerSecond * 3.6; // Output in km/h

@@ -16,7 +16,7 @@ io.on('connection', function (socket) {
         socket.emit('speed', {
             kmPerHour: speedSensor.getCurrentSpeed()
         });
-    }, 100);
+    }, 200);
 });
 
 var server = http.listen(3000, function () {
