@@ -1,0 +1,7 @@
+{
+  "speed": {
+    "radius": 0.2,
+    "numberOfMagnets": 4,
+    "scale": 1
+  }
+}
