@@ -19,7 +19,7 @@
                 width:        2,
                 text:         function(value){return value + '<br><span>km/h</span>';},
                 colors:       ['rgba(255, 255, 255, 0.1)', '#24dbd6'],
-                duration:     200,
+                duration:     0,
                 textClass:    'circle-graph-text',
                 styleText:    true
             });
@@ -32,7 +32,7 @@
                 width:        2,
                 text:         function(value){return value + '<br><span>Grad</span>';},
                 colors:       ['rgba(255, 255, 255, 0.1)', '#24dbd6'],
-                duration:     200,
+                duration:     0,
                 textClass:    'circle-graph-text',
                 styleText:    true
             });
@@ -45,7 +45,7 @@
                 width:        2,
                 text:         function(value){return value + '<br><span>Prozent</span>';},
                 colors:       ['rgba(255, 255, 255, 0.1)', '#24dbd6'],
-                duration:     200,
+                duration:     0,
                 textClass:    'circle-graph-text',
                 styleText:    true
             });
@@ -64,6 +64,7 @@
 </head>
 <body>
     <header>
+        <img id="logo" src="images/vrbike-logo.svg" height="30" />
         <div id="connection-status">
             <span id="connection-status--text">Verbindung wird hergestellt...</span>
             <i id="connection-status--led" class="yellow"></i>
