@@ -50,7 +50,8 @@
                 styleText:    true
             });
 
-            var socket = io.connect('http://192.168.0.20:3000');
+            var host = window.location.host;
+            var socket = io.connect(host);
             socket.on('connect', function () {
                 $('#connection-status--text').text("Verbunden");
                 $('#connection-status--led').removeClass('yellow').addClass('green');
