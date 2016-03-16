@@ -7,7 +7,7 @@ var gpio = require('gpio');
  *  scale: 1
  * }
  */
-var gpio25, frequency, options, timeout;
+var gpio25, frequency, options, timeout, currentAcceleration = 0;
 
 module.exports = {
 
@@ -52,6 +52,16 @@ module.exports = {
         var meterPerSecond = 1000 / frequency * mToMDistance * options.scale;
 
         return meterPerSecond * 3.6; // Output in km/h
+    },
+
+    onAccelerationChange: undefined,
+
+    setCurrentAcceleration: function (acceleration) {
+        // TODO comparison with defined number of decimals
+        if (currentAcceleration !== acceleration) {
+            currentAcceleration = acceleration;
+            if (typeof this.onAccelerationChange === 'function') this.onAccelerationChange(currentAcceleration);
+        }
     }
 
 };

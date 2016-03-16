@@ -2,6 +2,15 @@
   "speed": {
     "radius": 0.2,
     "numberOfMagnets": 4,
-    "scale": 1
+    "scale": 1,
+    "manual": {
+      "acceleration": 1,
+      "deacceleration": -1
+    }
+  },
+  "steering": {
+    "manual": {
+      "maxAngle": 30
+    }
   }
 }
