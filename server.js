@@ -9,7 +9,7 @@ var steeringService = require('./services/steering');
 global.keyControls = false;
 
 app.use('/dashboard', express.static('dashboard'));
-app.post('/enablekeycontrols', function (req, res) {
+app.post('/keycontrols', function (req, res) {
     global.keyControls = !global.keyControls;
     res.json({
         keyControls: global.keyControls
@@ -31,12 +31,6 @@ steeringService.onSteeringAngleChange = function (angle) {
 
 io.on('connection', function (socket) {
     console.log("Device connected!");
-
-    /*socket.interval = setInterval(function () {
-        socket.emit('speed', {
-            kmPerHour: speedSensor.getCurrentSpeed()
-        });
-    }, 200);*/
 
     socket.on('key-forward', function (data) {
         speedService.setCurrentAcceleration(config.get('speed.manual.acceleration') * data);

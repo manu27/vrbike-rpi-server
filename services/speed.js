@@ -42,7 +42,7 @@ module.exports = {
         });
     },
 
-    getCurrentSpeed: function () {
+    /*getCurrentSpeed: function () {
         if (!frequency) {
             return 0;
         }
@@ -52,7 +52,7 @@ module.exports = {
         var meterPerSecond = 1000 / frequency * mToMDistance * options.scale;
 
         return meterPerSecond * 3.6; // Output in km/h
-    },
+    },*/
 
     onAccelerationChange: undefined,
 

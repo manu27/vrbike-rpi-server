@@ -2,8 +2,12 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <title>Dashboard | VR Bike</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
     <link href='https://fonts.googleapis.com/css?family=Roboto:100,400' rel='stylesheet' type='text/css'>
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="js/circles.min.js"></script>
@@ -56,9 +60,16 @@
                 $('#connection-status--text').text("Verbunden");
                 $('#connection-status--led').removeClass('yellow').addClass('green');
             });
-            socket.on('speed', function (data) {
-                console.log(data);
-                speedGraph.update(Math.floor(data.kmPerHour));
+            socket.on('reconnecting', function () {
+                $('#connection-status--text').text("Verbindung verloren! Neuverbinden...");
+                $('#connection-status--led').removeClass('green').addClass('yellow');
+            });
+            socket.on('reconnect', function () {
+                $('#connection-status--text').text("Verbunden");
+                $('#connection-status--led').removeClass('yellow').addClass('green');
+            });
+            socket.on('acceleration', function (data) {
+                speedGraph.update(Math.floor(data.acceleration));
             });
 
             var keys = {

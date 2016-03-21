@@ -12,5 +12,15 @@
     "manual": {
       "maxAngle": 30
     }
+  },
+  "brake": {
+    "max": {
+      "procentage": 100,
+      "value": 1023
+    },
+    "min": {
+      "procentage": 0,
+      "value": 0
+    }
   }
 }
