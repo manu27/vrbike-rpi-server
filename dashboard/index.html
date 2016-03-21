@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
 
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="js/circles.min.js"></script>
+    <script src="js/circles.js"></script>
     <script src="js/socket.io.js"></script>
 
     <script>
@@ -32,7 +32,7 @@
                 id:           'steering-graph',
                 radius:       100,
                 value:        0,
-                maxValue:     90,
+                maxValue:     360,
                 width:        2,
                 text:         function(value){return value + '<br><span>Grad</span>';},
                 colors:       ['rgba(255, 255, 255, 0.1)', '#24dbd6'],
@@ -55,7 +55,7 @@
             });
 
             var host = window.location.host;
-            var socket = io.connect(host);
+            var socket = io.connect(host, { query: 'name=Dashboard' });
             socket.on('connect', function () {
                 $('#connection-status--text').text("Verbunden");
                 $('#connection-status--led').removeClass('yellow').addClass('green');
@@ -69,7 +69,13 @@
                 $('#connection-status--led').removeClass('yellow').addClass('green');
             });
             socket.on('acceleration', function (data) {
+                if (data.acceleration <= 0) {
+                    brakeGraph.update(100);
+                }
                 speedGraph.update(Math.floor(data.acceleration));
+            });
+            socket.on('steering', function (data) {
+                steeringGraph.update(Math.floor(data.angle));
             });
 
             var keys = {

@@ -16,6 +16,7 @@ app.post('/keycontrols', function (req, res) {
     });
 });
 
+// Set onValueChange functions to emit new values to sockets
 speedService.onAccelerationChange = function (acceleration) {
     console.log(acceleration);
     io.emit('acceleration', {
@@ -29,8 +30,9 @@ steeringService.onSteeringAngleChange = function (angle) {
     });
 };
 
+// Listen to key events for manual controls of the bike
 io.on('connection', function (socket) {
-    console.log("Device connected!");
+    console.log((socket.handshake.query.name ? socket.handshake.query.name : 'Device') + " connected!");
 
     socket.on('key-forward', function (data) {
         speedService.setCurrentAcceleration(config.get('speed.manual.acceleration') * data);
@@ -46,6 +48,7 @@ io.on('connection', function (socket) {
     });
 });
 
+// Start server on port 3000
 var server = http.listen(3000, function () {
     console.log('Example app listening on port 3000');
 });
