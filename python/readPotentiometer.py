@@ -1,11 +1,12 @@
 #Python Systemklasse importieren
 import sys
+import imp
 #Python Timerklasse importieren
 import time
-#Python Raspberry Pi GPIO Klasse importieren
-import RPi.GPIO as GPIO
 
-print (sys.argv[0] or 0);
+print imp.find_module('RPi')
+    #Python Raspberry Pi GPIO Klasse importieren
+    #import RPi.GPIO as GPIO
 
 # Festlegung der Nutzung der vorgegebenen Nummerierung der GPIOs
 GPIO.setmode(GPIO.BCM)
@@ -47,7 +48,7 @@ def getAnalogData(adCh, CLKPin, DINPin, DOUTPin, CSPin):
     return adchvalue
 
 # Konfiguration Eingangskanal und GPIOs
-if (len(sys.argv < 2): # Analog/Digital-Channel
+if (len(sys.argv) < 2): # Analog/Digital-Channel
     CH = 0
 else:
     CH = sys.argv[1]
