@@ -1,12 +1,9 @@
 #Python Systemklasse importieren
 import sys
-import imp
 #Python Timerklasse importieren
 import time
-
-print imp.find_module('RPi')
-    #Python Raspberry Pi GPIO Klasse importieren
-    #import RPi.GPIO as GPIO
+#Python Raspberry Pi GPIO Klasse importieren
+import RPi.GPIO as GPIO
 
 # Festlegung der Nutzung der vorgegebenen Nummerierung der GPIOs
 GPIO.setmode(GPIO.BCM)
