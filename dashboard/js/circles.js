@@ -203,7 +203,6 @@
     },
 
     _calculatePath: function(percentage, open) {
-      console.log(percentage);
       var end      = this._start + ((percentage / 100) * this._circ),
         endPrecise = this._precise(end);
       return this._arc(endPrecise, open, percentage >= 0);

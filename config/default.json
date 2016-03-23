@@ -2,24 +2,32 @@
   "speed": {
     "radius": 0.2,
     "numberOfMagnets": 4,
-    "scale": 1,
+    "multiplier": 1,
     "manual": {
       "acceleration": 1,
       "deacceleration": -1
     }
   },
   "steering": {
+    "max": {
+      "angle": 105,
+      "value": 956
+    },
+    "min": {
+      "angle": -105,
+      "value": 37
+    },
     "manual": {
       "maxAngle": 30
     }
   },
   "brake": {
     "max": {
-      "procentage": 100,
+      "percentage": 100,
       "value": 1023
     },
     "min": {
-      "procentage": 0,
+      "percentage": 0,
       "value": 0
     }
   }
