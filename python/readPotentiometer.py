@@ -62,3 +62,4 @@ GPIO.setup(CS,   GPIO.OUT)
 
 while True:
     print getAnalogData(CH, CLK, DIN, DOUT, CS)
+    sys.stdout.flush()
