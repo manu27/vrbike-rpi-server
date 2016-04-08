@@ -5,6 +5,8 @@ import time
 #Python Raspberry Pi GPIO Klasse importieren
 import RPi.GPIO as GPIO
 
+GPIO.setwarnings(False)
+
 # Festlegung der Nutzung der vorgegebenen Nummerierung der GPIOs
 GPIO.setmode(GPIO.BCM)
 
@@ -48,7 +50,7 @@ def getAnalogData(adCh, CLKPin, DINPin, DOUTPin, CSPin):
 if (len(sys.argv) < 2): # Analog/Digital-Channel
     CH = 0
 else:
-    CH = sys.argv[1]
+    CH = int(sys.argv[1])
 CLK     = 18 # Clock
 DIN     = 24 # Digital in
 DOUT    = 23  # Digital out
