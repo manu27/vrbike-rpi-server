@@ -1,5 +1,9 @@
-var gpio = require('gpio');
-
+try {
+    var wpi = require('wiring-pi');
+} catch(e) {
+    console.warn(e.toString());
+    return;
+}
 /**
  * var options = {
  *  radius: 0.2,
@@ -7,39 +11,57 @@ var gpio = require('gpio');
  *  scale: 1
  * }
  */
-var gpio25, frequency, options, timeout, currentAcceleration = 0;
+var gpio28, frequency, options, timeout, currentAcceleration = 0;
 
 module.exports = {
 
-    initialize: function (settings) {
+    initializeAndStart: function (settings) {
         options = settings;
 
-        gpio25 = gpio.export(25, {
+        wpi.setup('wpi');
+        wpi.pinMode(28, wpi.INPUT);
+        wpi.pullUpDnControl(28, wpi.PUD_DOWN);
+
+        this.startMonitoring();
+
+        /*gpio20 = gpio.export(20, {
             direction: 'in',
             interval: 10,
             ready: function () {
                 var time;
-                console.log("GPIO25 ready to read!");
+                console.log("GPIO20 ready to read!");
 
-                gpio25.on('change', function (val) {
-                    if (val) { // do something if signal is 1
-                        if (timeout) {
-                            clearTimeout(timeout);
-                        }
-
-                        if (time) {
-                            var diff = process.hrtime(time);
-                            frequency = (diff[0] * 1e9 + diff[1]) / 1e6;
-                            console.log(frequency);
-                        }
-                        time = process.hrtime();
-                        timeout = setTimeout(function () {
-                            frequency = null;
-                        }, 2000);
-                    }
-                });
+                this.startMonitoring();
             }
+        });*/
+    },
+
+    startMonitoring: function () {
+        wpi.wiringPiISR(28, wpi.INT_EDGE_FALLING, function (delta) {
+            console.log("Pin 28 changed to LOW (", delta, ")");
         });
+
+        /*gpio20.on('change', function (val) {
+            if (val) { // do something if signal is 1
+                if (timeout) {
+                    clearTimeout(timeout);
+                }
+
+                if (time) {
+                    var diff = process.hrtime(time);
+                    frequency = (diff[0] * 1e9 + diff[1]) / 1e6;
+                    console.log(frequency);
+                }
+                time = process.hrtime();
+                timeout = setTimeout(function () {
+                    frequency = null;
+                }, 2000);
+            }
+        });*/
+    },
+
+    stopMonitoring: function () {
+        //gpio20.removeAllListeners('change');
     },
 
     /*getCurrentSpeed: function () {

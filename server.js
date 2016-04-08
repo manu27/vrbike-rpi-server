@@ -33,6 +33,7 @@ steeringService.onSteeringAngleChange = function (angle) {
 
 // Init and start
 steeringService.initializeAndStart();
+speedService.initializeAndStart();
 
 // Listen to key events for manual controls of the bike
 io.on('connection', function (socket) {
