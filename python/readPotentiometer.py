@@ -43,7 +43,7 @@ def getAnalogData(adCh, CLKPin, DINPin, DOUTPin, CSPin):
         adchvalue <<= 1 # 1 Postition nach links schieben
         if(GPIO.input(DOUTPin)):
             adchvalue |= 0x01
-    time.sleep(0.5)
+    time.sleep(0.1)
     return adchvalue
 
 # Konfiguration Eingangskanal und GPIOs

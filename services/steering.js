@@ -1,5 +1,3 @@
-var PythonShell = require('python-shell');
-//var readPoti = new PythonShell(__base + 'python/readPotentiometer.py', { args: [0], mode: 'text' });
 var config = require(__base + 'config/default');
 var sys = require('sys');
 var spawn = require('child_process').spawn;
@@ -13,24 +11,23 @@ module.exports = {
         angleRange = config.steering.max.angle + Math.abs(config.steering.min.angle);
         step = angleRange / valueRange;
 
+        var that = this;
         dummy.stdout.on('data', function (data) {
-            this.setCurrentValue(data.toString());
-            console.log(data.toString());
+            that.setCurrentValue(data.toString());
         });
 
         dummy.stdout.on('close', function (code) {
             console.log(code);
         });
-        //this.startMonitoring()
+        this.startMonitoring()
     },
 
     startMonitoring: function () {
         var that = this;
         interval = setInterval(function () {
             var angle = step * that.getCurrentValue() + config.steering.min.angle;
-            console.log(angle);
-            that.setCurrentSteeringAngle(angle);
-        }, 200);
+            that.setCurrentSteeringAngle(Math.round(angle));
+        }, 100);
     },
 
     stopMonitoring: function () {
