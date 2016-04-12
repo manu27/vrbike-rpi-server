@@ -1,7 +1,7 @@
 var config = require(__base + 'config/default');
 var sys = require('sys');
 var spawn = require('child_process').spawn;
-var dummy = spawn('python', [__base + 'python/readPotentiometer.py']);
+var poti = spawn('python', [__base + 'python/readPotentiometer.py'], ['0']);
 
 var currentSteeringAngle = 0, interval, currentValue, valueRange, angleRange, step;
 
@@ -12,11 +12,11 @@ module.exports = {
         step = angleRange / valueRange;
 
         var that = this;
-        dummy.stdout.on('data', function (data) {
+        poti.stdout.on('data', function (data) {
             that.setCurrentValue(data.toString());
         });
 
-        dummy.stdout.on('close', function (code) {
+        poti.stdout.on('close', function (code) {
             console.log(code);
         });
         this.startMonitoring()
@@ -25,7 +25,9 @@ module.exports = {
     startMonitoring: function () {
         var that = this;
         interval = setInterval(function () {
-            var angle = step * that.getCurrentValue() + config.steering.min.angle;
+            var curValue = that.getCurrentValue();
+            if (!curValue) return;
+            var angle = step * curValue + config.steering.min.angle;
             that.setCurrentSteeringAngle(Math.round(angle));
         }, 100);
     },

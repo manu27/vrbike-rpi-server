@@ -19,7 +19,7 @@
                 id:           'speed-graph',
                 radius:       100,
                 value:        0,
-                maxValue:     40,
+                maxValue:     120,
                 width:        2,
                 text:         function(value){return value + '<br><span>km/h</span>';},
                 colors:       ['rgba(255, 255, 255, 0.1)', '#24dbd6'],
@@ -68,11 +68,8 @@
                 $('#connection-status--text').text("Verbunden");
                 $('#connection-status--led').removeClass('yellow').addClass('green');
             });
-            socket.on('acceleration', function (data) {
-                if (data.acceleration <= 0) {
-                    brakeGraph.update(100);
-                }
-                speedGraph.update(Math.floor(data.acceleration));
+            socket.on('speed', function (data) {
+                speedGraph.update(Math.floor(data.rpm));
             });
             socket.on('steering', function (data) {
                 steeringGraph.update(Math.floor(data.angle));

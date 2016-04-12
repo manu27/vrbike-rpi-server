@@ -1,8 +1,16 @@
 {
   "speed": {
-    "radius": 0.2,
     "numberOfMagnets": 4,
     "multiplier": 1,
+    "max": {
+      "rpm": 100,
+      "value": 1
+    },
+    "min": {
+      "rpm": 0,
+      "value": 0
+    },
+    "timeout": 2000,
     "manual": {
       "acceleration": 1,
       "deacceleration": -1
@@ -10,11 +18,11 @@
   },
   "steering": {
     "max": {
-      "angle": 105,
+      "angle": 98,
       "value": 956
     },
     "min": {
-      "angle": -105,
+      "angle": -112,
       "value": 37
     },
     "manual": {
