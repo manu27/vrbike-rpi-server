@@ -1,8 +1,7 @@
-try {
+var os = require(__base + 'helpers/os');
+
+if (os.isPlatform('linux')) {
     var wpi = require('wiring-pi');
-} catch(e) {
-    console.warn(e.toString());
-    return;
 }
 
 var gpio28, options, timeout, currentRPM = 0;
@@ -12,24 +11,28 @@ module.exports = {
     initializeAndStart: function (settings) {
         options = settings;
 
-        wpi.setup('wpi');
-        wpi.pinMode(28, wpi.INPUT);
-        wpi.pullUpDnControl(28, wpi.PUD_DOWN);
+        if (os.isPlatform('linux')) {
+            wpi.setup('wpi');
+            wpi.pinMode(28, wpi.INPUT);
+            wpi.pullUpDnControl(28, wpi.PUD_DOWN);
 
-        this.startMonitoring();
+            this.startMonitoring();
+        }
     },
 
     startMonitoring: function () {
-        var that = this;
-        wpi.wiringPiISR(28, wpi.INT_EDGE_RISING, function (delta) {
-            if (timeout) clearTimeout(timeout);
-            var newDelta = delta * options.numberOfMagnets;
-            var rpm = 60000000 / newDelta;
-            that.setCurrentRPM(rpm);
-            timeout = setTimeout(function () {
-                that.setCurrentRPM(0);
-            }, options.timeout);
-        });
+        if (os.isPlatform('linux')) {
+            var that = this;
+            wpi.wiringPiISR(28, wpi.INT_EDGE_RISING, function (delta) {
+                if (timeout) clearTimeout(timeout);
+                var newDelta = delta * options.numberOfMagnets;
+                var rpm = 60000000 / newDelta;
+                that.setCurrentRPM(rpm);
+                timeout = setTimeout(function () {
+                    that.setCurrentRPM(0);
+                }, options.timeout);
+            });
+        }
     },
 
     stopMonitoring: function () {
