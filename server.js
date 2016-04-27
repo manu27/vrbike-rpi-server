@@ -22,7 +22,6 @@ app.post('/shutdown', function (req, res) {
     exec("sudo shutdown -h now", function (error, stdout, stderr) {
         res.end("Shutdown...");
     });
-    res.write('Shutdown...');
 });
 
 // Set onValueChange functions to emit new values to sockets
@@ -41,11 +40,12 @@ steeringService.onSteeringAngleChange = function (angle) {
 };
 
 // Init and start
-steeringService.initializeAndStart();
+steeringService.initializeAndStart(config.steering);
 speedService.initializeAndStart(config.speed);
 
 // Listen to key events for manual controls of the bike
 io.on('connection', function (socket) {
+    // TODO send current values
     console.log((socket.handshake.query.name ? socket.handshake.query.name : 'Device') + " connected!");
 
     socket.on('key-forward', function (data) {

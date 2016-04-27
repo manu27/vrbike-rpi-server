@@ -39,9 +39,15 @@ module.exports = {
         //gpio20.removeAllListeners('change');
     },
 
+    getCurrentRPM: function () {
+        return currentRPM;
+    },
+
     onRPMChange: undefined,
 
     setCurrentRPM: function (rpm) {
+        rpm = rpm <= config.limit ? rpm : config.limit;
+
         // TODO comparison with defined number of decimals
         if (currentRPM !== rpm) {
             currentRPM = rpm;

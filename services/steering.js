@@ -1,18 +1,19 @@
 var os = require(__base + 'helpers/os');
-var config = require(__base + 'config/default');
 if (os.isPlatform('linux')) {
     var sys = require('sys');
     var spawn = require('child_process').spawn;
     var poti = spawn('python', [__base + 'python/readPotentiometer.py'], ['0']);
 }
 
-var currentSteeringAngle = 0, interval, currentValue, valueRange, angleRange, step;
+var currentSteeringAngle = 0, interval, currentValue = 0, valueRange, angleRange, step, options;
 
 module.exports = {
-    initializeAndStart: function () {
+    initializeAndStart: function (settings) {
+        options = settings;
+
         if (os.isPlatform('linux')) {
-            valueRange = config.steering.max.value - config.steering.min.value;
-            angleRange = config.steering.max.angle + Math.abs(config.steering.min.angle);
+            valueRange = options.max.value - options.min.value;
+            angleRange = options.max.angle + Math.abs(options.min.angle);
             step = angleRange / valueRange;
 
             var that = this;
@@ -33,7 +34,7 @@ module.exports = {
             interval = setInterval(function () {
                 var curValue = that.getCurrentValue();
                 if (!curValue) return;
-                var angle = step * curValue + config.steering.min.angle;
+                var angle = step * curValue + options.min.angle;
                 that.setCurrentSteeringAngle(Math.round(angle));
             }, 100);
         }

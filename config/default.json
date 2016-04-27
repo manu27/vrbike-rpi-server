@@ -1,5 +1,6 @@
 {
   "speed": {
+    "limit": 200,
     "numberOfMagnets": 4,
     "multiplier": 1,
     "max": {
