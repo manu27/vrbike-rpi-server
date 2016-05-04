@@ -1,7 +1,7 @@
 {
   "speed": {
     "limit": 200,
-    "numberOfMagnets": 4,
+    "numberOfMagnets": 2,
     "multiplier": 1,
     "max": {
       "rpm": 100,

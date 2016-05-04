@@ -46,7 +46,7 @@ module.exports = {
     onRPMChange: undefined,
 
     setCurrentRPM: function (rpm) {
-        rpm = rpm <= config.limit ? rpm : config.limit;
+        rpm = rpm <= options.limit ? rpm : options.limit;
 
         // TODO comparison with defined number of decimals
         if (currentRPM !== rpm) {
