@@ -48,17 +48,21 @@ io.on('connection', function (socket) {
     // TODO send current values
     console.log((socket.handshake.query.name ? socket.handshake.query.name : 'Device') + " connected!");
 
-    socket.on('key-forward', function (data) {
-        speedService.setCurrentRPM(config.speed.max.rpm * data);
-    });
-    socket.on('key-backward', function (data) {
-        speedService.setCurrentRPM(-config.speed.max.rpm * data);
-    });
-    socket.on('key-left', function (data) {
-        steeringService.setCurrentSteeringAngle(-config.steering.manual.maxAngle * data);
-    });
-    socket.on('key-right', function (data) {
-        steeringService.setCurrentSteeringAngle(config.steering.manual.maxAngle * data);
+    socket.on('key-controls', function (data) {
+        console.log(data);
+        if (!data.type) data.type = 'forward';
+        if (data.type == 'forward') {
+            speedService.setCurrentRPM(config.speed.max.rpm * data.value);
+        }
+        if (data.type == 'backward') {
+            speedService.setCurrentRPM(-config.speed.max.rpm * data.value);
+        }
+        if (data.type == 'left') {
+            steeringService.setCurrentSteeringAngle(-config.steering.manual.maxAngle * data.value);
+        }
+        if (data.type == 'right') {
+            steeringService.setCurrentSteeringAngle(config.steering.manual.maxAngle * data.value);
+        }
     });
 });
 
